@@ -1,6 +1,6 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
-// import { AuthService } from './auth.service';
+import { Component } from '@angular/core';
+import { GoogleIdentityService } from '@jin-k/google-identity';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +8,17 @@ import { Component, Inject } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'client1';
+  readonly connected$: Observable<boolean>;
 
-  constructor(
-    @Inject(DOCUMENT) dom: Document
-    // readonly authService: AuthService
-  ) {
-    // const scriptElem = dom.createElement('script');
-    // scriptElem.src = 'https://accounts.google.com/gsi/client';
-    // scriptElem.async = true;
-    // scriptElem.defer = true;
-    // scriptElem.onload = authService.initClient.bind(authService);
-    // dom.body.appendChild(scriptElem);
+  constructor(private readonly _googleIdentityService: GoogleIdentityService) {
+    this.connected$ = this._googleIdentityService.loggedIn$;
   }
 
-  login() {
-    console.log('login()');
+  logIn() {
+    this._googleIdentityService.logIn();
+  }
+
+  logOff() {
+    this._googleIdentityService.logOff();
   }
 }

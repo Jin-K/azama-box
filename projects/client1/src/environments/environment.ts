@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  GAPI_CLIENT_ID:
+  CLIENT_ID:
     '457160115677-npkvk346jii3t9ee24qqdu4vq7cu6dkv.apps.googleusercontent.com',
 };
 

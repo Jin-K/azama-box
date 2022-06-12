@@ -28,7 +28,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/client1/src/favicon.ico",
-              "projects/client1/src/assets"
+              "projects/client1/src/assets",
+              {
+                "glob": "**/*.html",
+                "input": "projects/jin-k/google-identity/static/",
+                "output": "./"
+              }
             ],
             "styles": ["projects/client1/src/styles.scss"],
             "scripts": []
