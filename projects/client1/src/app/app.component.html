@@ -1,16 +1,21 @@
 <button (click)="logIn()">Login</button>
 <button (click)="logOff()">Logoff</button>
+<button (click)="logOff(true)">Revoke and Logoff</button>
 
-<span
-  *ngIf="connected$ | async"
-  [ngStyle]="{
-    marginLeft: '5px',
-    padding: '2px',
-    color: 'white',
-    backgroundColor: 'green'
-  }"
-  >Connected</span
->
+<ng-container *ngIf="connected$ | async">
+  <span
+    [ngStyle]="{
+      marginLeft: '5px',
+      padding: '2px',
+      color: 'white',
+      backgroundColor: 'green'
+    }"
+    >Connected</span
+  >
+
+  <hr />
+  <img [src]="picture$ | async" />
+</ng-container>
 
 <span
   *ngIf="(connected$ | async) === false"

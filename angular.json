@@ -81,13 +81,7 @@
               "browserTarget": "client1:build:development"
             }
           },
-          "defaultConfiguration": "development",
-          "options": {
-            "allowedHosts": ["localhost", "am4it-drive.dev"],
-            "ssl": true,
-            "sslKey": "ssl/am4it-drive.dev-key.pem",
-            "sslCert": "ssl/am4it-drive.dev.pem"
-          }
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
