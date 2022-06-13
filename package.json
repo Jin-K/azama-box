@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:docs": "ng build --base-href /azama-box/ --output-path docs",
+    "build:github-pages": "run-s build:libs build:docs",
     "build:lib:google-identity": "ng build @jin-k/google-identity",
     "build:libs": "run-s build:lib:*",
     "watch": "ng build --watch --configuration development",
