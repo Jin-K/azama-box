@@ -52,8 +52,8 @@ export class GoogleIdentityModule {
     return {
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
-      redirectUri: window.location.origin,
-      silentRefreshRedirectUri: window.location.origin + '/silent-refresh.html',
+      redirectUri: this.getOurUrl(),
+      silentRefreshRedirectUri: this.getOurUrl() + '/silent-refresh.html',
       useSilentRefresh: true,
       clientId: config.clientId,
       scope:
@@ -63,9 +63,19 @@ export class GoogleIdentityModule {
       logoutUrl:
         config.logoutFromGoogleMode === 'redirect'
           ? 'https://accounts.google.com/Logout?continue=https://appengine.google.com/_ah/logout?continue=' +
-            window.location.origin
+            this.getOurUrl()
           : 'https://accounts.google.com/Logout',
       showDebugInformation: config.debug,
     };
+  }
+
+  private static getOurUrl() {
+    const origin = window.location.origin;
+    const path = window.location.pathname;
+    let result = origin + path;
+    if (result.endsWith('/')) {
+      result = result.substring(0, result.length - 1);
+    }
+    return result;
   }
 }
