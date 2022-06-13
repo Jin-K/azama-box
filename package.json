@@ -5,13 +5,14 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:docs": "ng build --base-href /azama-box/ --output-path docs",
     "build:lib:google-identity": "ng build @jin-k/google-identity",
     "build:libs": "run-s build:lib:*",
     "watch": "ng build --watch --configuration development",
     "watch:lib:google-identity": "ng build --watch --configuration development @jin-k/google-identity",
     "watch:libs": "run-p watch:lib:*",
     "test": "ng test",
-    "start:build": "http-server -p 443 -a am4it-drive.dev --ssl --cert ssl/am4it-drive.dev.pem --key ssl/am4it-drive.dev-key.pem docs"
+    "start:build": "http-server -p 443 -a am4it-drive.dev --ssl --cert ssl/am4it-drive.dev.pem --key ssl/am4it-drive.dev-key.pem dist/client1"
   },
   "private": true,
   "dependencies": {
