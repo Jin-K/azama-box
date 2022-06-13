@@ -11,7 +11,7 @@
     "watch:lib:google-identity": "ng build --watch --configuration development @jin-k/google-identity",
     "watch:libs": "run-p watch:lib:*",
     "test": "ng test",
-    "start:build": "http-server -p 443 -a am4it-drive.dev --ssl --cert ssl/am4it-drive.dev.pem --key ssl/am4it-drive.dev-key.pem dist/client1"
+    "start:build": "http-server -p 443 -a am4it-drive.dev --ssl --cert ssl/am4it-drive.dev.pem --key ssl/am4it-drive.dev-key.pem docs"
   },
   "private": true,
   "dependencies": {
