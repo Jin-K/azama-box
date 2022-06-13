@@ -23,8 +23,7 @@ import { AppComponent } from './app.component';
 
         // scopes below will be used to get the unique access token we want,
         // this scopes are registered & allowed in my google app
-        'https://www.googleapis.com/auth/calendar.readonly',
-        'https://www.googleapis.com/auth/drive.readonly',
+        'https://www.googleapis.com/auth/drive.file',
       ],
       logoutFromGoogleMode: 'popup',
     }),
