@@ -28,15 +28,13 @@ export class GoogleIdentityService {
       .pipe(filter((e) => e.type === 'token_received'))
       .subscribe(() => this._loggedInSrc.next(true));
 
-    this.loggedIn$
-      .pipe(filter((loggedIn) => loggedIn))
-      .subscribe(() =>
-        this._oAuthService
-          .loadUserProfile()
-          .then((userProfile) =>
-            this._userProfileSrc.next((userProfile as { info: object }).info)
-          )
-      );
+    this.loggedIn$.pipe(filter((loggedIn) => loggedIn)).subscribe(() =>
+      this._oAuthService.loadUserProfile().then((userProfile) => {
+        if (this.userProfileHasInfo(userProfile)) {
+          this._userProfileSrc.next(userProfile.info);
+        }
+      })
+    );
   }
 
   logIn() {
@@ -44,38 +42,18 @@ export class GoogleIdentityService {
   }
 
   logOff(revoke = false) {
-    const mode = this._config.logoutFromGoogleMode;
-    const noRedirect = mode !== 'redirect';
-
     if (revoke) {
-      this._oAuthService.revokeTokenAndLogout(noRedirect, true);
+      this._oAuthService.revokeTokenAndLogout(true, true);
     } else {
-      this._oAuthService.logOut(noRedirect);
+      this._oAuthService.logOut(true);
     }
 
-    switch (mode) {
-      case 'window':
-      case 'popup':
-        const features =
-          mode === 'popup' ? this.calculatePopupFeatures() : void 0;
-        const wnd = window.open(this._oAuthService.logoutUrl, void 0, features);
-        setTimeout(() => {
-          wnd?.close();
-          this._loggedInSrc.next(false);
-        }, 250);
-        break;
-      default:
-        this._loggedInSrc.next(false);
-        break;
-    }
+    this._loggedInSrc.next(false);
   }
 
-  private calculatePopupFeatures() {
-    // Specify an static height and width and calculate centered position
-    const height = 470;
-    const width = 500;
-    const left = window.screenLeft + (window.outerWidth - width) / 2;
-    const top = window.screenTop + (window.outerHeight - height) / 2;
-    return `location=no,toolbar=no,width=${width},height=${height},top=${top},left=${left}`;
+  private userProfileHasInfo(userProfile: {
+    info?: object;
+  }): userProfile is { info: object } {
+    return userProfile.info instanceof Object;
   }
 }
