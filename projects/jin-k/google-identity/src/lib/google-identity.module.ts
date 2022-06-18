@@ -60,11 +60,6 @@ export class GoogleIdentityModule {
         config.scopes instanceof Array
           ? config.scopes.filter((s) => s).join(' ')
           : config.scopes,
-      logoutUrl:
-        config.logoutFromGoogleMode === 'redirect'
-          ? 'https://accounts.google.com/Logout?continue=https://appengine.google.com/_ah/logout?continue=' +
-            this.getOurUrl()
-          : 'https://accounts.google.com/Logout',
       showDebugInformation: config.debug,
     };
   }

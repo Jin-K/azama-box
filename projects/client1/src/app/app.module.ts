@@ -25,7 +25,6 @@ import { AppComponent } from './app.component';
         // this scopes are registered & allowed in my google app
         'https://www.googleapis.com/auth/drive.file',
       ],
-      logoutFromGoogleMode: 'popup',
     }),
   ],
   providers: [],
