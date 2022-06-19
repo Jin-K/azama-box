@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import {
   BehaviorSubject,
@@ -6,8 +6,6 @@ import {
   filter,
   ReplaySubject,
 } from 'rxjs';
-import { GOOGLE_IDENTITY_CONFIG } from './google-identity-config.token';
-import { GoogleIdentityConfig } from './google-identity.config';
 
 @Injectable()
 export class GoogleIdentityService {
@@ -18,8 +16,6 @@ export class GoogleIdentityService {
   readonly userProfile$ = this._userProfileSrc.asObservable();
 
   constructor(
-    @Inject(GOOGLE_IDENTITY_CONFIG)
-    private readonly _config: GoogleIdentityConfig,
     private readonly _oAuthService: OAuthService
   ) {
     this._loggedInSrc.next(this._oAuthService.hasValidAccessToken());

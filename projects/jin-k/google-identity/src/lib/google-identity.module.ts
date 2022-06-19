@@ -1,6 +1,7 @@
 import {
   APP_INITIALIZER,
   Inject,
+  InjectionToken,
   ModuleWithProviders,
   NgModule,
   Optional,
@@ -8,7 +9,10 @@ import {
 import { AuthConfig, OAuthModule, OAuthService } from 'angular-oauth2-oidc';
 import { GoogleIdentityService } from './google-identity.service';
 import { GoogleIdentityConfig } from './google-identity.config';
-import { GOOGLE_IDENTITY_CONFIG } from './google-identity-config.token';
+
+const GOOGLE_IDENTITY_CONFIG = new InjectionToken<GoogleIdentityConfig>(
+  'GOOGLE_IDENTITY_CONFIG'
+);
 
 @NgModule({
   imports: [OAuthModule.forRoot()],
@@ -22,7 +26,7 @@ export class GoogleIdentityModule {
   ) {
     if (!config) {
       throw new Error(
-        'Provide `GOOGLE_IDENTITY_CONFIG` yourself or import module with `.forRoot()` in your AppModule'
+        'You should import GoogleIdentityModule.forRoot() in your AppModule'
       );
     }
   }
@@ -49,11 +53,16 @@ export class GoogleIdentityModule {
   }
 
   private static createAuthConfig(config: GoogleIdentityConfig): AuthConfig {
+    let url = window.location.origin + window.location.pathname;
+    if (url.endsWith('/')) {
+      url = url.substring(0, url.length - 1);
+    }
+
     return {
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
-      redirectUri: this.getOurUrl(),
-      silentRefreshRedirectUri: this.getOurUrl() + '/silent-refresh.html',
+      redirectUri: url,
+      silentRefreshRedirectUri: url + '/silent-refresh.html',
       useSilentRefresh: true,
       clientId: config.clientId,
       scope:
@@ -62,15 +71,5 @@ export class GoogleIdentityModule {
           : config.scopes,
       showDebugInformation: config.debug,
     };
-  }
-
-  private static getOurUrl() {
-    const origin = window.location.origin;
-    const path = window.location.pathname;
-    let result = origin + path;
-    if (result.endsWith('/')) {
-      result = result.substring(0, result.length - 1);
-    }
-    return result;
   }
 }

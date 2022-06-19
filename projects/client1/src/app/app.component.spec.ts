@@ -1,12 +1,17 @@
+import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { GoogleIdentityModule } from '@jin-k/google-identity';
+import { take } from 'rxjs';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule,
+        GoogleIdentityModule.forRoot({ clientId: '', scopes: '' })
       ],
       declarations: [
         AppComponent
@@ -20,16 +25,12 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'client1'`, () => {
+  it(`should not be connected at begin`, done => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('client1');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('client1 app is running!');
+    app.connected$.pipe(take(1)).subscribe(connected => {
+      expect(connected).toBeFalse();
+      done();
+    });
   });
 });
