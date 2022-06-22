@@ -6,11 +6,18 @@ import {
   filter,
   ReplaySubject,
 } from 'rxjs';
+import { GoogleIdTokenPayload } from './types';
+
+const userProfileHasInfo = (
+  userProfile: object
+): userProfile is { info: GoogleIdTokenPayload } =>
+  (userProfile as { info?: unknown }).info instanceof Object;
 
 @Injectable()
 export class GoogleIdentityService {
   private readonly _loggedInSrc = new ReplaySubject<boolean>(1);
-  private readonly _userProfileSrc = new BehaviorSubject<object | null>(null);
+  private readonly _userProfileSrc =
+    new BehaviorSubject<GoogleIdTokenPayload | null>(null);
 
   readonly loggedIn$ = this._loggedInSrc.pipe(distinctUntilChanged());
   readonly userProfile$ = this._userProfileSrc.asObservable();
@@ -26,7 +33,7 @@ export class GoogleIdentityService {
 
     this.loggedIn$.pipe(filter((loggedIn) => loggedIn)).subscribe(() =>
       this._oAuthService.loadUserProfile().then((userProfile) => {
-        if (this.userProfileHasInfo(userProfile)) {
+        if (userProfileHasInfo(userProfile)) {
           this._userProfileSrc.next(userProfile.info);
         }
       })
@@ -45,11 +52,5 @@ export class GoogleIdentityService {
     }
 
     this._loggedInSrc.next(false);
-  }
-
-  private userProfileHasInfo(userProfile: {
-    info?: object;
-  }): userProfile is { info: object } {
-    return userProfile.info instanceof Object;
   }
 }

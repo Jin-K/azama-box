@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { AuthConfig, OAuthModule, OAuthService } from 'angular-oauth2-oidc';
 import { GoogleIdentityService } from './google-identity.service';
-import { GoogleIdentityConfig } from './google-identity.config';
+import { GoogleIdentityConfig } from './types';
 
 const GOOGLE_IDENTITY_CONFIG = new InjectionToken<GoogleIdentityConfig>(
   'GOOGLE_IDENTITY_CONFIG'

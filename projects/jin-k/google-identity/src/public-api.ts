@@ -4,4 +4,4 @@
 
 export * from './lib/google-identity.service';
 export * from './lib/google-identity.module';
-export { GoogleIdentityConfig } from './lib/google-identity.config';
+export { GoogleIdentityConfig, GoogleIdTokenPayload } from './lib/types';

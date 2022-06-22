@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { GoogleIdentityService } from '@jin-k/google-identity';
-import { filter, Observable, pluck, shareReplay } from 'rxjs';
+import { notNullOrUndefined } from '@jin-k/utils';
+import { Observable, pluck, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,9 @@ export class AppComponent {
       shareReplay(1)
     );
     this.picture$ = this._googleIdentityService.userProfile$.pipe(
-      filter((up): up is Record<string, string> => up !== null),
+      notNullOrUndefined(),
       pluck('picture'),
+      notNullOrUndefined(),
       shareReplay(1)
     );
   }
