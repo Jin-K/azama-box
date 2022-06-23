@@ -38,6 +38,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 @jin-k/google-identity
 
+@jin-k/utils
+
 angular-oauth2-oidc
 MIT
 Copyright (c) 2017 Manfred Steyer
