@@ -6,7 +6,6 @@
     "start": "ng serve",
     "start:build": "http-server -p 443 -a azama-box.dev --ssl --cert ssl/azama-box.dev.pem --key ssl/azama-box.dev-key.pem dist/client1",
     "build": "ng build client1",
-    "build:docs": "ng build client1 --base-href /azama-box/ --output-path docs",
     "build:github-pages": "run-s build:libs build:docs",
     "build:lib:google-identity": "ng build @jin-k/google-identity",
     "build:lib:utils": "ng build @jin-k/utils",
