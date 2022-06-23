@@ -6,9 +6,11 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { DemoComponent } from './demo/demo.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PrivacyPolicyComponent, DemoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
