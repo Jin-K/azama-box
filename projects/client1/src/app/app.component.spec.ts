@@ -11,11 +11,9 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         HttpClientModule,
-        GoogleIdentityModule.forRoot({ clientId: '', scopes: '' })
+        GoogleIdentityModule.forRoot({ clientId: '', scopes: '' }),
       ],
-      declarations: [
-        AppComponent
-      ],
+      declarations: [AppComponent],
     }).compileComponents();
   });
 
@@ -25,10 +23,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should not be connected at begin`, done => {
+  it(`should not be connected at begin`, (done) => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    app.connected$.pipe(take(1)).subscribe(connected => {
+    app.connected$.pipe(take(1)).subscribe((connected) => {
       expect(connected).toBeFalse();
       done();
     });

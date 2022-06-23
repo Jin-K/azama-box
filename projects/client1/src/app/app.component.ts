@@ -13,9 +13,7 @@ export class AppComponent {
   readonly picture$: Observable<string>;
 
   constructor(private readonly _googleIdentityService: GoogleIdentityService) {
-    this.connected$ = this._googleIdentityService.loggedIn$.pipe(
-      shareReplay(1)
-    );
+    this.connected$ = this._googleIdentityService.loggedIn$.pipe(shareReplay(1));
     this.picture$ = this._googleIdentityService.userProfile$.pipe(
       notNullOrUndefined(),
       pluck('picture'),
@@ -29,6 +27,6 @@ export class AppComponent {
   }
 
   logOff(revoke = false) {
-    this._googleIdentityService.logOff(revoke);
+    this._googleIdentityService.logOut(revoke);
   }
 }

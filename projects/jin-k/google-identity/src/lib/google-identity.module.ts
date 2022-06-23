@@ -10,9 +10,7 @@ import { AuthConfig, OAuthModule, OAuthService } from 'angular-oauth2-oidc';
 import { GoogleIdentityService } from './google-identity.service';
 import { GoogleIdentityConfig } from './types';
 
-const GOOGLE_IDENTITY_CONFIG = new InjectionToken<GoogleIdentityConfig>(
-  'GOOGLE_IDENTITY_CONFIG'
-);
+const GOOGLE_IDENTITY_CONFIG = new InjectionToken<GoogleIdentityConfig>('GOOGLE_IDENTITY_CONFIG');
 
 @NgModule({
   imports: [OAuthModule.forRoot()],
@@ -25,15 +23,11 @@ export class GoogleIdentityModule {
     config: GoogleIdentityConfig | null
   ) {
     if (!config) {
-      throw new Error(
-        'You should import GoogleIdentityModule.forRoot() in your AppModule'
-      );
+      throw new Error('You should import GoogleIdentityModule.forRoot() in your AppModule');
     }
   }
 
-  static forRoot(
-    config: GoogleIdentityConfig
-  ): ModuleWithProviders<GoogleIdentityModule> {
+  static forRoot(config: GoogleIdentityConfig): ModuleWithProviders<GoogleIdentityModule> {
     return {
       ngModule: GoogleIdentityModule,
       providers: [
@@ -66,9 +60,7 @@ export class GoogleIdentityModule {
       useSilentRefresh: true,
       clientId: config.clientId,
       scope:
-        config.scopes instanceof Array
-          ? config.scopes.filter((s) => s).join(' ')
-          : config.scopes,
+        config.scopes instanceof Array ? config.scopes.filter((s) => s).join(' ') : config.scopes,
       showDebugInformation: config.debug,
     };
   }

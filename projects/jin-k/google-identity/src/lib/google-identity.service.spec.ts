@@ -9,7 +9,7 @@ describe('GoogleIdentityService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [GoogleIdentityModule.forRoot({ clientId: '', scopes: '' }), HttpClientModule]
+      imports: [GoogleIdentityModule.forRoot({ clientId: '', scopes: '' }), HttpClientModule],
     });
     service = TestBed.inject(GoogleIdentityService);
   });
