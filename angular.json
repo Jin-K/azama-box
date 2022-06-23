@@ -29,6 +29,7 @@
             "assets": [
               "projects/client1/src/favicon.ico",
               "projects/client1/src/assets",
+              "projects/client1/src/404.html",
               {
                 "glob": "**/*.html",
                 "input": "projects/jin-k/google-identity/static/",
@@ -97,10 +98,7 @@
             "tsConfig": "projects/client1/tsconfig.spec.json",
             "karmaConfig": "projects/client1/karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/client1/src/favicon.ico",
-              "projects/client1/src/assets"
-            ],
+            "assets": ["projects/client1/src/favicon.ico", "projects/client1/src/assets"],
             "styles": ["projects/client1/src/styles.scss"],
             "scripts": []
           }
