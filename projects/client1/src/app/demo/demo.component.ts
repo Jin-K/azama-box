@@ -6,7 +6,6 @@ import { Observable, shareReplay, pluck } from 'rxjs';
 @Component({
   selector: 'app-demo',
   templateUrl: './demo.component.html',
-  styleUrls: ['./demo.component.scss'],
 })
 export class DemoComponent {
   readonly connected$: Observable<boolean>;
