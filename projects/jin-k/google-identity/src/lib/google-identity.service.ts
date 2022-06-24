@@ -15,21 +15,7 @@ export class GoogleIdentityService {
   readonly userProfile$ = this._userProfileSrc.asObservable();
 
   constructor(private readonly _oAuthService: OAuthService) {
-    this._loggedInSrc.next(
-      this._oAuthService.hasValidIdToken() && this._oAuthService.hasValidAccessToken()
-    );
-
-    this._oAuthService.events
-      .pipe(filter((e) => e.type === 'token_received'))
-      .subscribe(() => this._loggedInSrc.next(true));
-
-    this.loggedIn$.pipe(filter((loggedIn) => loggedIn)).subscribe(() =>
-      this._oAuthService.loadUserProfile().then((userProfile) => {
-        if (userProfileHasInfo(userProfile)) {
-          this._userProfileSrc.next(userProfile.info);
-        }
-      })
-    );
+    this.init();
   }
 
   logIn() {
@@ -48,5 +34,26 @@ export class GoogleIdentityService {
 
   getAccessToken() {
     return this._oAuthService.getAccessToken();
+  }
+
+  private async init() {
+    await this._oAuthService.loadDiscoveryDocument();
+    await this._oAuthService.tryLoginImplicitFlow();
+
+    this._loggedInSrc.next(
+      this._oAuthService.hasValidIdToken() && this._oAuthService.hasValidAccessToken()
+    );
+
+    this._oAuthService.events
+      .pipe(filter((e) => e.type === 'token_received'))
+      .subscribe(() => this._loggedInSrc.next(true));
+
+    this.loggedIn$.pipe(filter((loggedIn) => loggedIn)).subscribe(() =>
+      this._oAuthService.loadUserProfile().then((userProfile) => {
+        if (userProfileHasInfo(userProfile)) {
+          this._userProfileSrc.next(userProfile.info);
+        }
+      })
+    );
   }
 }

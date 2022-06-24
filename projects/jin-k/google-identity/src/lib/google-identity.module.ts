@@ -1,17 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
-import {
-  APP_INITIALIZER,
-  Inject,
-  InjectionToken,
-  ModuleWithProviders,
-  NgModule,
-  Optional,
-} from '@angular/core';
-import { AuthConfig, OAuthModule, OAuthService } from 'angular-oauth2-oidc';
+import { Inject, ModuleWithProviders, NgModule, Optional } from '@angular/core';
+import { AuthConfig, AUTH_CONFIG, OAuthModule, OAuthService } from 'angular-oauth2-oidc';
 import { GoogleIdentityService } from './google-identity.service';
 import { GoogleIdentityConfig } from './types';
-
-const GOOGLE_IDENTITY_CONFIG = new InjectionToken<GoogleIdentityConfig>('GOOGLE_IDENTITY_CONFIG');
 
 @NgModule({
   imports: [HttpClientModule, OAuthModule.forRoot()],
@@ -19,31 +10,17 @@ const GOOGLE_IDENTITY_CONFIG = new InjectionToken<GoogleIdentityConfig>('GOOGLE_
 })
 export class GoogleIdentityModule {
   constructor(
-    @Inject(GOOGLE_IDENTITY_CONFIG)
-    @Optional()
-    config: GoogleIdentityConfig | null
+    @Inject(AUTH_CONFIG) @Optional() config: AuthConfig | null,
+    oAuthService: OAuthService
   ) {
-    if (!config) {
-      throw new Error('You should import GoogleIdentityModule.forRoot() in your AppModule');
-    }
+    if (!config) throw new Error('You should import GoogleIdentityModule.forConfig()');
+    oAuthService.configure(config);
   }
 
-  static forRoot(config: GoogleIdentityConfig): ModuleWithProviders<GoogleIdentityModule> {
+  static forAuthConfig(config: GoogleIdentityConfig): ModuleWithProviders<GoogleIdentityModule> {
     return {
       ngModule: GoogleIdentityModule,
-      providers: [
-        { provide: GOOGLE_IDENTITY_CONFIG, useValue: config },
-        {
-          provide: APP_INITIALIZER,
-          useFactory: (oAuthService: OAuthService) => async () => {
-            oAuthService.configure(this.createAuthConfig(config));
-            await oAuthService.loadDiscoveryDocument();
-            return await oAuthService.tryLoginImplicitFlow();
-          },
-          multi: true,
-          deps: [OAuthService],
-        },
-      ],
+      providers: [{ provide: AUTH_CONFIG, useFactory: () => this.createAuthConfig(config) }],
     };
   }
 
