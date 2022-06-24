@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { GoogleIdentityModule } from '@jin-k/google-identity';
 
 import { DemoComponent } from './demo.component';
 
@@ -8,7 +9,7 @@ describe('DemoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DemoComponent],
+      imports: [GoogleIdentityModule.forAuthConfig({ clientId: '', scopes: '' })],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DemoComponent);

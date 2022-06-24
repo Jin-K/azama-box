@@ -7,10 +7,7 @@ describe('PrivacyPolicyComponent', () => {
   let fixture: ComponentFixture<PrivacyPolicyComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ PrivacyPolicyComponent ]
-    })
-    .compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(PrivacyPolicyComponent);
     component = fixture.componentInstance;
