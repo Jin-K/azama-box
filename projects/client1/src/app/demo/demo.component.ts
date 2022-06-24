@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { GoogleIdentityService } from '@jin-k/google-identity';
 import { notNullOrUndefined } from '@jin-k/utils';
@@ -5,7 +6,9 @@ import { Observable, shareReplay, pluck } from 'rxjs';
 
 @Component({
   selector: 'app-demo',
+  imports: [CommonModule],
   templateUrl: './demo.component.html',
+  standalone: true,
 })
 export class DemoComponent {
   readonly connected$: Observable<boolean>;

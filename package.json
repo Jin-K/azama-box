@@ -10,7 +10,7 @@
     "build:lib:google-identity": "ng build @jin-k/google-identity",
     "build:lib:utils": "ng build @jin-k/utils",
     "build:libs": "run-s build:lib:*",
-    "deploy": "ng deploy",
+    "deploy": "ng deploy && git fetch --all",
     "watch": "ng build client1 --watch --configuration development",
     "watch:lib:google-identity": "ng build --watch --configuration development @jin-k/google-identity",
     "watch:lib:utils": "ng build --watch --configuration development @jin-k/utils",

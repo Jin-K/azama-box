@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import {
   APP_INITIALIZER,
   Inject,
@@ -13,7 +14,7 @@ import { GoogleIdentityConfig } from './types';
 const GOOGLE_IDENTITY_CONFIG = new InjectionToken<GoogleIdentityConfig>('GOOGLE_IDENTITY_CONFIG');
 
 @NgModule({
-  imports: [OAuthModule.forRoot()],
+  imports: [HttpClientModule, OAuthModule.forRoot()],
   providers: [GoogleIdentityService],
 })
 export class GoogleIdentityModule {
