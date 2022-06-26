@@ -6,6 +6,9 @@
     "url": "https://github.com/Jin-K/azama-box.git",
     "directory": "projects/jin-k/google-oidc-login-provider"
   },
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
   "peerDependencies": {
     "@abacritt/angularx-social-login": "^1.2.1",
     "@angular/common": "^14.0.3",
