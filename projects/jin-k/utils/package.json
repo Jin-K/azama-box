@@ -1,6 +1,11 @@
 {
   "name": "@jin-k/utils",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jin-K/azama-box.git",
+    "directory": "projects/jin-k/utils"
+  },
   "peerDependencies": {
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0"

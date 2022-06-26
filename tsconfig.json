@@ -3,13 +3,9 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@jin-k/google-identity": [
-        "dist/jin-k/google-identity/jin-k-google-identity",
-        "dist/jin-k/google-identity"
-      ],
-      "@jin-k/utils": [
-        "dist/jin-k/utils"
-      ]
+      "@jin-k/google-identity": ["dist/jin-k/google-identity"],
+      "@jin-k/google-oidc-login-provider": ["dist/jin-k/google-oidc-login-provider"],
+      "@jin-k/utils": ["dist/jin-k/utils"]
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

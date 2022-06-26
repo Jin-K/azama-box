@@ -1,24 +1,34 @@
 {
   "name": "azama-box",
   "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jin-K/azama-box.git"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "start:build": "http-server -p 443 -a azama-box.dev --ssl --cert ssl/azama-box.dev.pem --key ssl/azama-box.dev-key.pem dist/client1",
+    "start": "ng serve client1",
+    "start:client2": "ng serve client2",
     "build": "ng build client1",
+    "build:client2": "ng build client2",
     "build:github-pages": "run-s build:libs build:docs",
     "build:lib:google-identity": "ng build @jin-k/google-identity",
     "build:lib:utils": "ng build @jin-k/utils",
+    "build:lib:google-oidc-login-provider": "ng build @jin-k/google-oidc-login-provider",
     "build:libs": "run-s build:lib:*",
-    "deploy": "ng deploy && git fetch --all",
+    "deploy": "run-s build:lib:google-identity build:lib:utils && ng deploy client1 && git fetch --all",
+    "deploy:client2": "run-s build:lib:google-oidc-login-provider && ng deploy client2 && git fetch --all",
     "watch": "ng build client1 --watch --configuration development",
+    "watch:client2": "ng build client2 --watch --configuration development",
     "watch:lib:google-identity": "ng build --watch --configuration development @jin-k/google-identity",
     "watch:lib:utils": "ng build --watch --configuration development @jin-k/utils",
+    "watch:lib:google-oidc-login-provider": "ng build --watch --configuration development @jin-k/google-oidc-login-provider",
     "watch:libs": "run-p watch:lib:*",
     "test": "ng test"
   },
   "private": true,
   "dependencies": {
+    "@abacritt/angularx-social-login": "^1.2.1",
     "@angular/animations": "^14.0.3",
     "@angular/common": "^14.0.3",
     "@angular/compiler": "^14.0.3",

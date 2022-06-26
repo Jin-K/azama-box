@@ -1,14 +1,15 @@
 {
-  "name": "@jin-k/google-identity",
+  "name": "@jin-k/google-oidc-login-provider",
   "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/Jin-K/azama-box.git",
-    "directory": "projects/jin-k/google-identity"
+    "directory": "projects/jin-k/google-oidc-login-provider"
   },
   "peerDependencies": {
-    "@angular/common": "^13.1.0",
-    "@angular/core": "^13.1.0",
+    "@abacritt/angularx-social-login": "^1.2.1",
+    "@angular/common": "^14.0.3",
+    "@angular/core": "^14.0.3",
     "angular-oauth2-oidc": "^13.0.1"
   },
   "dependencies": {
