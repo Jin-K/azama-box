@@ -1,8 +1,8 @@
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { GoogleIdentityService } from '@jin-k/google-identity';
-import { notNullOrUndefined } from '@jin-k/utils';
-import { Observable, shareReplay, pluck } from 'rxjs';
+import { GoogleOidcLoginProvider } from '@jin-k/google-oidc-login-provider';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-demo',
@@ -11,24 +11,15 @@ import { Observable, shareReplay, pluck } from 'rxjs';
   standalone: true,
 })
 export class DemoComponent {
-  readonly connected$: Observable<boolean>;
-  readonly picture$: Observable<string>;
-
-  constructor(private readonly _googleIdentityService: GoogleIdentityService) {
-    this.connected$ = this._googleIdentityService.loggedIn$.pipe(shareReplay(1));
-    this.picture$ = this._googleIdentityService.userProfile$.pipe(
-      notNullOrUndefined(),
-      pluck('picture'),
-      notNullOrUndefined(),
-      shareReplay(1)
-    );
+  constructor(readonly authService: SocialAuthService) {
+    this.authService.authState.subscribe(console.log);
   }
 
   logIn() {
-    this._googleIdentityService.logIn();
+    this.authService.signIn(GoogleOidcLoginProvider.PROVIDER_ID);
   }
 
   logOff(revoke = false) {
-    this._googleIdentityService.logOut(revoke);
+    this.authService.signOut(revoke);
   }
 }

@@ -2,7 +2,7 @@
 <button (click)="logOff()">Logoff</button>
 <button (click)="logOff(true)">Revoke and Logoff</button>
 
-<ng-container *ngIf="connected$ | async">
+<ng-container *ngIf="authService.authState | async as socialUser">
   <span
     [ngStyle]="{
       marginLeft: '5px',
@@ -14,11 +14,12 @@
   >
 
   <hr />
-  <img [src]="picture$ | async" />
+  <img [src]="socialUser.photoUrl" />
+  <p>Hello {{ socialUser.name }}</p>
 </ng-container>
 
 <span
-  *ngIf="(connected$ | async) === false"
+  *ngIf="(authService.authState | async) === null"
   [ngStyle]="{
     marginLeft: '5px',
     padding: '2px',

@@ -9,5 +9,12 @@
   </head>
   <body>
     <app-root></app-root>
+    <script>
+      // This is for google silent refresh
+      (window.opener || window.parent).postMessage(
+        location.hash || '#' + location.search,
+        location.origin
+      );
+    </script>
   </body>
 </html>
