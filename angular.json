@@ -26,15 +26,7 @@
             "polyfills": "projects/client1/src/polyfills.ts",
             "tsConfig": "projects/client1/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/client1/src/favicon.ico",
-              "projects/client1/src/assets",
-              {
-                "glob": "**/*.html",
-                "input": "projects/jin-k/google-identity/static/",
-                "output": "./"
-              }
-            ],
+            "assets": ["projects/client1/src/favicon.ico", "projects/client1/src/assets"],
             "styles": ["projects/client1/src/styles.scss"],
             "scripts": []
           },
