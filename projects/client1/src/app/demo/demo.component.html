@@ -1,6 +1,7 @@
 <button (click)="logIn()">Login</button>
 <button (click)="logOff()">Logoff</button>
 <button (click)="logOff(true)">Revoke and Logoff</button>
+<button (click)="getAccessToken()">Get access token</button>
 
 <ng-container *ngIf="authService.authState | async as socialUser">
   <span

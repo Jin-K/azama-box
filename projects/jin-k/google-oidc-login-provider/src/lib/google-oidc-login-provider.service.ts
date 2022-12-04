@@ -73,6 +73,10 @@ export class GoogleOidcLoginProviderService implements LoginProvider {
     }
   }
 
+  async getAccessToken() {
+    debugger;
+  }
+
   private createUser(idToken: string): SocialUser {
     const user = new SocialUser();
     const payload = JSON.parse(window.atob(idToken.split('.')[1]));

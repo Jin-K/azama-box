@@ -19,6 +19,11 @@ export class DemoComponent {
     this.authService.signIn(GoogleOidcLoginProvider.PROVIDER_ID);
   }
 
+  getAccessToken() {
+    debugger;
+    this.authService.getAccessToken(GoogleOidcLoginProvider.PROVIDER_ID);
+  }
+
   logOff(revoke = false) {
     this.authService.signOut(revoke);
   }
